@@ -7,14 +7,24 @@
 //
 
 import UIKit
+import Firebase
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var userNameTxt: UITextField!
+    @IBOutlet weak var passwordTxt: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
     }
 
-
+    @IBAction func loginBtn(_ sender: Any) {
+        
+    }
+    @IBAction func registerBtn(_ sender: Any) {
+        
+    }
+    
 }
 
