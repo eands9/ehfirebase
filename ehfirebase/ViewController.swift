@@ -23,7 +23,7 @@ class ViewController: UIViewController {
         
     }
     @IBAction func registerBtn(_ sender: Any) {
-        
+        Auth.auth().createUser(withEmail: <#T##String#>, password: <#T##String#>, completion: <#T##AuthDataResultCallback?##AuthDataResultCallback?##(AuthDataResult?, Error?) -> Void#>)
     }
     
 }
