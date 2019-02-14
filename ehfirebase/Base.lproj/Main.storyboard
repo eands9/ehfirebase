@@ -54,7 +54,6 @@
                                 <state key="normal" title="Register"/>
                                 <connections>
                                     <action selector="registerBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="9dg-62-rEe"/>
-                                    <segue destination="HhH-gz-tD7" kind="show" identifier="goToUpdateDB" id="DoV-VN-2vZ"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kQY-bT-jLW">
@@ -73,6 +72,7 @@
                     <connections>
                         <outlet property="passwordTxt" destination="5q2-FB-d1L" id="SNt-Ze-7NG"/>
                         <outlet property="userNameTxt" destination="Jaw-zP-Tgl" id="XlW-x1-7ia"/>
+                        <segue destination="cLb-ZX-73K" kind="show" identifier="goToUpdateDB" id="AS5-Od-ibk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -80,26 +80,55 @@
             <point key="canvasLocation" x="169" y="88"/>
         </scene>
         <!--Update DB-->
-        <scene sceneID="oMg-ym-ILl">
+        <scene sceneID="cgM-G7-l0I">
             <objects>
-                <viewController title="Update DB" id="HhH-gz-tD7" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="hvS-E2-J0q">
+                <viewController title="Update DB" id="cLb-ZX-73K" customClass="UpdateDB" customModule="ehfirebase" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Zzh-Tb-zDv">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Of9-As-rnO">
-                                <rect key="frame" x="162" y="230" width="51" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bOt-XO-tTZ">
+                                <rect key="frame" x="162" y="228" width="51" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Update"/>
+                                <connections>
+                                    <action selector="updateBtn:" destination="cLb-ZX-73K" eventType="touchUpInside" id="MN3-aY-qeM"/>
+                                </connections>
                             </button>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ynz-eg-CUH">
+                                <rect key="frame" x="139" y="96" width="97" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0ed-Qn-yUT">
+                                <rect key="frame" x="139" y="145" width="97" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JqK-OE-CXk">
+                                <rect key="frame" x="139" y="295" width="97" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="FAx-EF-izP"/>
+                        <viewLayoutGuide key="safeArea" id="wqi-Nb-wZC"/>
                     </view>
+                    <connections>
+                        <outlet property="categoryTxt" destination="Ynz-eg-CUH" id="KeJ-AI-tgD"/>
+                        <outlet property="timeTxt" destination="0ed-Qn-yUT" id="kQC-Qh-l1z"/>
+                        <outlet property="userNameTxt" destination="JqK-OE-CXk" id="pBq-AU-Njz"/>
+                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="mtZ-wQ-cNp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bPJ-rF-s9v" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1017" y="88"/>
+            <point key="canvasLocation" x="1002" y="88"/>
         </scene>
     </scenes>
 </document>

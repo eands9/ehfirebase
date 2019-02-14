@@ -27,6 +27,8 @@ class ViewController: UIViewController {
             
             if error != nil {
                 print(error!)
+                print(error!._code)
+                SVProgressHUD.dismiss()
             } else {
                 print("Log in successful!")
                 
@@ -46,6 +48,23 @@ class ViewController: UIViewController {
             } else {
                 //success
                 print("Registration Successful!")
+                SVProgressHUD.dismiss()
+                self.performSegue(withIdentifier: "goToUpdateDB", sender: self)
+                
+                let modUserName1 = self.userNameTxt.text!
+                let modUserName2 = modUserName1.replacingOccurrences(of: "@", with: "")
+                let modUsername3 = modUserName2.replacingOccurrences(of: ".", with: "")
+                let refUserNameDB = Database.database().reference().child("Users").child(modUsername3)
+                let refDictionary = ["Email": modUserName1]
+                refUserNameDB.setValue(refDictionary){
+                    (error,reference) in
+                    if error != nil{
+                        print(error!)
+                    } else {
+                        print("Message saved successfully!")
+                        
+                    }
+                }
             }
         }
     }
