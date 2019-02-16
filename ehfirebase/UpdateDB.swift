@@ -28,10 +28,9 @@ class UpdateDB: UIViewController {
         let modUserName1 = userName.replacingOccurrences(of: "@", with: "")
         let modUsername2 = modUserName1.replacingOccurrences(of: ".", with: "")
         let refUserNameDB = Database.database().reference().child("Users").child(modUsername2).child(categoryTxt.text!)
-        let refDictionary = ["AvgTime": timeTxt.text!, "Date": getCurrentShortDate()]
+        let timeInSeconds = Int(timeTxt.text!)
 
-        
-        refUserNameDB.setValue(refDictionary){
+        refUserNameDB.setValue(["AvgTime": timeInSeconds, "Date": getCurrentShortDate()]){
             (error,reference) in
             if error != nil{
                 print(error!)
@@ -49,6 +48,17 @@ class UpdateDB: UIViewController {
         let DateInFormat = dateFormatter.string(from: todaysDate)
         
         return DateInFormat
+    }
+    @IBAction func retrieveBtn(_ sender: Any) {
+        let messageDB = Database.database().reference().child("Users").child("eands9yahoocom").child("1A")
+        
+        messageDB.observe(DataEventType.value, with: {(snapshot) in
+            let snapshotValue = snapshot.value as? [String : AnyObject] ?? [:]
+            let averageTime = snapshotValue["AvgTime"]!
+            print(averageTime)
+            self.userNameTxt.text = "\(averageTime)"
+            //self.readMe(myText: "Kate's average time is \(averageTime) seconds.")
+        })
     }
     
 }
