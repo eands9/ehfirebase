@@ -8,12 +8,16 @@
 
 import UIKit
 import Firebase
+import Speech
 
 class UpdateDB: UIViewController {
 
     @IBOutlet weak var categoryTxt: UITextField!
     @IBOutlet weak var timeTxt: UITextField!
     @IBOutlet weak var userNameTxt: UITextField!
+    
+    var timer = Timer()
+    var counter = 0
     
     override func viewDidLoad() {
 
@@ -60,5 +64,50 @@ class UpdateDB: UIViewController {
             //self.readMe(myText: "Kate's average time is \(averageTime) seconds.")
         })
     }
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let touchCount = touches.count
+        let touch = touches.first
+        let tapCount = touch!.tapCount
+        
+        categoryTxt.text = "touchesBegan"
+        //timeTxt.text = "\(touchCount) touches"
+        //userNameTxt.text = "\(tapCount) taps"
+        print("start touching")
+        stopTimer()
+    }
+    @objc func fireTimer() {
+        counter += 1
+        userNameTxt.text = "\(counter)"
+        
+        if counter == 5{
+            readMe(myText: "Get back to work!")
+        }
+        
+    }
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let touchCount = touches.count
+        let touch = touches.first
+        let tapCount = touch!.tapCount
+        
+        categoryTxt.text = "touchesEnded";
+        //timeTxt.text = "\(touchCount) touches"
+        //userNameTxt.text = "\(tapCount) taps"
+        print("stopped touching")
+        
+        counter = 0
+        userNameTxt.text = "\(counter)"
+        timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(fireTimer), userInfo: nil, repeats: true)
+    }
+    func stopTimer(){
+        timer.invalidate()
+    }
     
+    func readMe( myText: String) {
+        let utterance = AVSpeechUtterance(string: myText )
+        utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
+        utterance.rate = 0.5
+        
+        let synthesizer = AVSpeechSynthesizer()
+        synthesizer.speak(utterance)
+    }
 }
