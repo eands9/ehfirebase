@@ -17,12 +17,14 @@ class UpdateDB: UIViewController {
     @IBOutlet weak var userNameTxt: UITextField!
     
     var timer = Timer()
-    var counter = 0
+    var counter = 0.0
     
     override func viewDidLoad() {
 
         super.viewDidLoad()
-
+        observeUpdate()
+        setImproperlyClosedToN()
+        startTimer()
         // Do any additional setup after loading the view.
     }
     
@@ -64,6 +66,18 @@ class UpdateDB: UIViewController {
             //self.readMe(myText: "Kate's average time is \(averageTime) seconds.")
         })
     }
+    func observeUpdate(){
+        let messageDB = Database.database().reference().child("Users").child("eands9yahoocom").child("1A")
+        
+        messageDB.observe(DataEventType.value, with: {(snapshot) in
+            let snapshotValue = snapshot.value as? [String : AnyObject] ?? [:]
+            let averageTime = snapshotValue["AvgTime"]!
+            print(averageTime)
+            self.userNameTxt.text = "\(averageTime)"
+            self.readMe(myText: "Kate's average time is \(averageTime) seconds.")
+        })
+    }
+        
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         let touchCount = touches.count
         let touch = touches.first
@@ -94,12 +108,15 @@ class UpdateDB: UIViewController {
         //userNameTxt.text = "\(tapCount) taps"
         print("stopped touching")
         
-        counter = 0
-        userNameTxt.text = "\(counter)"
-        timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(fireTimer), userInfo: nil, repeats: true)
+        startTimer()
     }
     func stopTimer(){
         timer.invalidate()
+    }
+    func startTimer(){
+        counter = 0
+        userNameTxt.text = "\(counter)"
+        timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(fireTimer), userInfo: nil, repeats: true)
     }
     
     func readMe( myText: String) {
@@ -109,5 +126,23 @@ class UpdateDB: UIViewController {
         
         let synthesizer = AVSpeechSynthesizer()
         synthesizer.speak(utterance)
+    }
+    func setImproperlyClosedToN(){
+        let userName1 = Auth.auth().currentUser?.email as! String
+        let modUserName11 = userName1.replacingOccurrences(of: "@", with: "")
+        let modUsername21 = modUserName11.replacingOccurrences(of: ".", with: "")
+        let improperlyClosedDB = Database.database().reference().child("Users").child(modUsername21)
+        
+        improperlyClosedDB.updateChildValues(["ImproperlyClosed": "N"]){
+            //improperlyClosedDB.setValue(["ImproperlyClosed": "Y"]){
+            (error,reference) in
+            if error != nil{
+                print(error!)
+            } else {
+                print("Message saved successfully!")
+                
+            }
+            
+        }
     }
 }

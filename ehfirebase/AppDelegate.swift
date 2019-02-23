@@ -27,24 +27,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {
-        // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-        // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
         let userName1 = Auth.auth().currentUser?.email as! String
         let modUserName11 = userName1.replacingOccurrences(of: "@", with: "")
         let modUsername21 = modUserName11.replacingOccurrences(of: ".", with: "")
         let improperlyClosedDB = Database.database().reference().child("Users").child(modUsername21)
-        //let refDictionary = ["AvgTime": 5 , "Date": getCurrentShortDate()] as [String : Any]
-        
-        
-        improperlyClosedDB.setValue(["ImproperlyClosed": "Y"]){
+
+        improperlyClosedDB.updateChildValues(["ImproperlyClosed": "Y"]){
+        //improperlyClosedDB.setValue(["ImproperlyClosed": "Y"]){
             (error,reference) in
             if error != nil{
                 print(error!)
             } else {
                 print("Message saved successfully!")
-                
+
             }
-            
+
         }
 
     }
