@@ -18,6 +18,7 @@ class UpdateDB: UIViewController {
     
     var timer = Timer()
     var counter = 0.0
+    var averageTime = 0
     
     override func viewDidLoad() {
 
@@ -56,18 +57,23 @@ class UpdateDB: UIViewController {
         return DateInFormat
     }
     @IBAction func retrieveBtn(_ sender: Any) {
-        let messageDB = Database.database().reference().child("Users").child("eands9yahoocom").child("1A")
+        let messageDB = Database.database().reference().child("Users").child("eands9yahoocom").child("1A1")
         
         messageDB.observe(DataEventType.value, with: {(snapshot) in
-            let snapshotValue = snapshot.value as? [String : AnyObject] ?? [:]
-            let averageTime = snapshotValue["AvgTime"]!
-            print(averageTime)
-            self.userNameTxt.text = "\(averageTime)"
+            self.averageTime = (snapshot.value as? Int)!
+            //let snapshotValue = snapshot.value as? [String : AnyObject] ?? [:]
+            //averageTime = snapshotValue["AvgTime"]
+            
+            
+            //let averageTime = snapshotValue["AvgTime"]
+            self.userNameTxt.text = "\(self.averageTime)"
             //self.readMe(myText: "Kate's average time is \(averageTime) seconds.")
         })
+        
+        print(averageTime)
     }
     func observeUpdate(){
-        let messageDB = Database.database().reference().child("Users").child("eands9yahoocom").child("1A")
+        let messageDB = Database.database().reference().child("Users").child("eands9yahoocom").child("1A1")
         
         messageDB.observe(DataEventType.value, with: {(snapshot) in
             let snapshotValue = snapshot.value as? [String : AnyObject] ?? [:]

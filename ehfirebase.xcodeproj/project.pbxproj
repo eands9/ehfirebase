@@ -75,9 +75,9 @@
 			children = (
 				4D7713F62213C4AE00B19650 /* GoogleService-Info.plist */,
 				6D3690832213596500671AB1 /* AppDelegate.swift */,
+				4D7713FE22149E2000B19650 /* UpdateDB.swift */,
 				6D3690852213596500671AB1 /* ViewController.swift */,
 				6D3690872213596500671AB1 /* Main.storyboard */,
-				4D7713FE22149E2000B19650 /* UpdateDB.swift */,
 				6D36908A2213596600671AB1 /* Assets.xcassets */,
 				6D36908C2213596600671AB1 /* LaunchScreen.storyboard */,
 				6D36908F2213596600671AB1 /* Info.plist */,
